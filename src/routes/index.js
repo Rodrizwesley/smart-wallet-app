@@ -5,6 +5,7 @@ import { bindActionCreators }  from 'redux';
 import { doLogin, doLogout, setUsuario, setCarteiraCorrente, setMovimentacaoCarteiraCorrente} from '../store/actions'
 import Login from '../pages/Login';
 import Cadastro from '../pages/Cadastro';
+import RecuperarSenha from '../pages/RecuperarSenha';
 
 const Stack = createStackNavigator();
 
@@ -22,8 +23,17 @@ function AppNavigation(props){
                     headerShown: false,
                 }}/>
 
-                <Stack.Screen name='Increvendo' component={Cadastro} options={{
+                <Stack.Screen name='Cadastro' component={Cadastro} options={{
                     title: 'Realizar Cadastro',
+                    headerStyle: {
+                        backgroundColor: '#515151'
+                    },
+                    headerTintColor: '#E7E7E7'
+                }}/>
+
+                
+                <Stack.Screen name='Recuperar' component={RecuperarSenha} options={{
+                    title: 'Esqueci minha senha',
                     headerStyle: {
                         backgroundColor: '#515151'
                     },

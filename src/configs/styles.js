@@ -111,7 +111,7 @@ export const STYLE = StyleSheet.create({
     },
 
     cadastroText: {
-        fontSize: 22, 
+        fontSize: 20, 
         color: '#D0D0D0'
     },
 

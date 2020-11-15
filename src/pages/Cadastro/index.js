@@ -36,12 +36,15 @@ function Cadastro(props) {
 
 
     const validAndPersistForm = async () => {
+        setLoading(false);
         if(nomeCompleto != '' && cpf != '' && email1 != '' && email2 != '' && telefone != '' && senha1 != '' && senha2 != ''){
             if(email1 != email2){
                 Alert.alert('Atenção!', 'Seu e-mail não foi validado!\nVerifique os emails preenchidos e tente novamente.');
+                setLoading(false);
             }else{
                 if(senha1 != senha2){
-                    Alert.alert('Atenção!', 'As senhas nã coincidem!\nVerifique sua senha e tente novamente.');
+                    Alert.alert('Atenção!', 'As senhas não coincidem!\nVerifique sua senha e tente novamente.');
+                    setLoading(false);
                 }else {
                     if(Util.validaCPF(cpf)){
                         let _cpf = cpf.replace(/[^0-9]/g, "");                        
@@ -50,22 +53,26 @@ function Cadastro(props) {
                         
                             if(usuarioCadastro.idUsuario){
                                 setUsuario(usuarioCadastro);
+                                setLoading(false);
                                 Alert.alert('Parabéns!', 'Estamos muito felizes por você estar conosco!\nAproveite nossos recursos e ferramentas e tenha sua carteira inteligente!', [
                                     {text: 'Começar agora!', onPress: () => doLogin(true), style: 'default'},
                                     {text: 'Entrar depois!', onPress: () => props.navigation.goBack()}
                                 ]);
                             }
                         } catch (error) {
-                            console.error(error)
+                            console.error(error);
+                            setLoading(false);
                         }
                         
                     }else{
                         Alert.alert('Atenção!', 'Este CPF não é valido!\nVerifique seu CPF e tente novamente.');
+                         setLoading(false);
                     }
                 }
             }
         }else {
             Alert.alert('Atenção!', 'É necessário preencher todos os campos!\nVerifique quais campos não estão preenchidos e tente novamente.');
+            setLoading(false);
         }
     }
 
@@ -81,7 +88,7 @@ function Cadastro(props) {
                 </View>
 
                 <View style={STYLE.loginInputBox} >
-                    <Text style={STYLE.formLabel}>Nome Completo:</Text>
+                    <Text style={STYLE.formLabel}>Nome completo:</Text>
                     <TextInput
                         style={STYLE.textInput} 
                         placeholder='Insira seu nome completo'
@@ -118,7 +125,7 @@ function Cadastro(props) {
                         onSubmitEditing={() => refEmail2.current.focus()}
                         />
 
-                    <Text style={STYLE.formLabel}>Validação E-mail:</Text>
+                    <Text style={STYLE.formLabel}>Validação do E-mail:</Text>
                     <TextInput
                         ref={refEmail2}
                         style={email1 != email2 ? STYLE.textInputWrong : STYLE.textInput} 
@@ -156,7 +163,7 @@ function Cadastro(props) {
                         onSubmitEditing={() => refSenha2.current.focus()}
                         />
 
-                    <Text style={STYLE.formLabel}>Validação Senha:</Text>
+                    <Text style={STYLE.formLabel}>Validação de senha:</Text>
                     <TextInput
                         ref={refSenha2}
                         style={senha1 != senha2 ? STYLE.textInputWrong : STYLE.textInput} 
