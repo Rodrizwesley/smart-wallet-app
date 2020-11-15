@@ -1,0 +1,8 @@
+export const SIGN_IN ='SIGN_IN';
+export const SIGN_OUT ='SIGN_OUT';
+export const USUARIO = 'USUARIO';
+export const CARTEIRA_CORRENTE ='CARTEIRA_CORRENTE';
+export const MOVIMENTACAO_CARTEIRA_CORRENTE = 'MOVIMENTACAO_CARTEIRA_CORRENTE';
+export const LOADING = 'LOADING'
+
+
