@@ -10,6 +10,13 @@ export const STYLE = StyleSheet.create({
         alignContent: 'center',
         // padding: 10
     },
+
+    containerInternal: {
+        backgroundColor: '#232323',
+        flex: 1,
+        justifyContent: 'space-evenly',
+        alignContent: 'center',
+    },
     
     imageBox: {
         alignSelf: "center", 

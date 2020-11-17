@@ -6,6 +6,7 @@ import { doLogin, doLogout, setUsuario, setCarteiraCorrente, setMovimentacaoCart
 import Login from '../pages/Login';
 import Cadastro from '../pages/Cadastro';
 import RecuperarSenha from '../pages/RecuperarSenha';
+import DrawerNavigation from './DrawerNavigation';
 
 const Stack = createStackNavigator();
 
@@ -13,12 +14,12 @@ function AppNavigation(props){
     const {
         doLogin,
         globalState
-    } = props
+    } = props;
     
     return (
         <>
             <Stack.Navigator >
-                <Stack.Screen name='Login' component={Login} options={{
+                {/* <Stack.Screen name='Login' component={Login} options={{
                     title: 'Login',
                     headerShown: false,
                 }}/>
@@ -38,7 +39,11 @@ function AppNavigation(props){
                         backgroundColor: '#515151'
                     },
                     headerTintColor: '#E7E7E7'
-                }}/>
+                }}/> */}
+
+                <Stack.Screen name="Home" component={DrawerNavigation} options={{
+                        headerShown: false
+                    }} />
             </Stack.Navigator>
         </>
     )
