@@ -29,7 +29,7 @@ function TabNavigationCorrente(props){
                 options={{ 
                     tabBarIcon: ({focused}) => {
                         if(focused){
-                            return <Icon name='account-balance-wallet' size={35} color='#23D9B7' />
+                            return <Icon name='account-balance-wallet' size={35} color='#03DAC5' />
                         }
                         else{
                             return <Icon name='account-balance-wallet' size={35} color='#D0D0D0' />
@@ -43,7 +43,7 @@ function TabNavigationCorrente(props){
                 options={{ 
                     tabBarIcon: ({focused}) => {
                         if(focused){
-                            return <Icon name='receipt' size={35} color='#23D9B7' />
+                            return <Icon name='receipt' size={35} color='#03DAC5' />
                         }
                         else{
                             return <Icon name='receipt' size={35} color='#D0D0D0' />
@@ -57,7 +57,7 @@ function TabNavigationCorrente(props){
                 options={{ 
                     tabBarIcon: ({focused}) => {
                         if(focused){
-                            return <Icon name='donut-small' size={35} color='#23D9B7' />
+                            return <Icon name='donut-small' size={35} color='#03DAC5' />
                         }
                         else{
                             return <Icon name='donut-small' size={35} color='#D0D0D0' />

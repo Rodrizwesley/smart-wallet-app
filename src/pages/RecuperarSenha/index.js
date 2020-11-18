@@ -177,7 +177,7 @@ function RecuperarSenha(props){
                 {
                     globalState.isLoading ? 
                     <View style={STYLE.loading}>
-                        <ProgressBar color='#23D9B7' styleAttr='Large'/>
+                        <ProgressBar color='#03DAC5' styleAttr='Large'/>
                     </View> : null
                 }
 

@@ -17,6 +17,12 @@ export const STYLE = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignContent: 'center',
     },
+
+    drawerContainer: {
+        flex: 1,
+        backgroundColor: '#515151',
+        justifyContent: 'space-between'
+    },
     
     imageBox: {
         alignSelf: "center", 
@@ -81,7 +87,7 @@ export const STYLE = StyleSheet.create({
 
     loginTexts: {
         textDecorationLine: 'underline',
-        color: '#23D9B7'
+        color: '#03DAC5'
     },
 
     loginEntrarBox: {
@@ -91,7 +97,7 @@ export const STYLE = StyleSheet.create({
     },
 
     loginEntrarButton: {
-        backgroundColor: '#7D07F2', 
+        backgroundColor: '#7445FF', 
         borderRadius: 8, 
         width: '60%', 
         alignSelf: "center",
@@ -114,12 +120,20 @@ export const STYLE = StyleSheet.create({
     cadastroTextBox: {
         alignContent: 'center',
         alignSelf: 'center',
-        marginBottom: 20
+        marginBottom: 20,
+        marginHorizontal: 20
     },
 
     cadastroText: {
         fontSize: 20, 
         color: '#D0D0D0'
+    },
+
+    dadosPessoaisText: {
+        fontSize: 16, 
+        color: '#D0D0D0',
+        textAlign: 'justify',
+        fontWeight: 'bold'
     },
 
     cadastroButtonBox: {
@@ -128,7 +142,7 @@ export const STYLE = StyleSheet.create({
     },
 
     cadastroButton: {
-        backgroundColor: '#7D07F2',
+        backgroundColor: '#7445FF',
         borderRadius: 8, 
     },
 
