@@ -7,7 +7,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { RadioButton } from 'react-native-paper';
 import { setCarteiraCorrente, setMovimentacaoCarteiraCorrente, setLoading } from '../../store/actions';
 import { STYLE } from '../../configs';
-import { CarteiraCorrenteService, Util } from '../../services';
+import { CarteiraCorrenteService } from '../../services';
 import { CardResumo } from '../../components/CardResumoCarteira';
 import { CardCarteira } from '../../components/CardCarteira';
 import { CardMovimentacaoCarrocel } from '../../components/CardMovimentacaoCarrocel';
@@ -35,8 +35,8 @@ function HomeCarteiraCorrente(props) {
     let controller;
 
     useEffect(() => {
+        setLoading(true);
         syncPage();
-        
     },[])
 
     const syncPage = async () => {

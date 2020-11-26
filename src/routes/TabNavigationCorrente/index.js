@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { setCarteiraCorrente, setMovimentacaoCarteiraCorrente } from '../../store/actions';
 import HomeCarteiraCorrente from '../../pages/HomeCarteiraCorrente';
+import MovimentacaoCarteiraCorrente from '../../pages/MovimentacaoCarteiraCorrente';
 
 const Tab = createBottomTabNavigator();
 
@@ -39,7 +40,7 @@ function TabNavigationCorrente(props){
                 <Tab.Screen                     
                 initialParams={props}
                 name="Movimentacao"
-                component={HomeCarteiraCorrente}
+                component={MovimentacaoCarteiraCorrente}
                 options={{ 
                     tabBarIcon: ({focused}) => {
                         if(focused){

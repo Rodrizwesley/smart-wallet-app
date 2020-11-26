@@ -7,7 +7,8 @@ const INITIAL_STATE = {
     isSignout: false,
     usuario: null,
     carteiraCorrente: [],
-    movimentacaoCarteiraCorrente: []
+    movimentacaoCarteiraCorrente: [],
+    isAuthenticate: false
 }
 
 const stateReducer = (state = INITIAL_STATE, action) => {

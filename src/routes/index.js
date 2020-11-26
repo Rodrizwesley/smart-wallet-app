@@ -15,35 +15,44 @@ function AppNavigation(props){
         doLogin,
         globalState
     } = props;
+
+    useEffect(() => {
+        console.log(globalState)
+    }, [])
     
     return (
         <>
             <Stack.Navigator >
-                {/* <Stack.Screen name='Login' component={Login} options={{
-                    title: 'Login',
-                    headerShown: false,
-                }}/>
+            {
+                !globalState.isAuthenticate ? 
+                    <>
+                        <Stack.Screen name='Login' component={Login} options={{
+                            title: 'Login',
+                            headerShown: false,
+                        }}/>
 
-                <Stack.Screen name='Cadastro' component={Cadastro} options={{
-                    title: 'Realizar Cadastro',
-                    headerStyle: {
-                        backgroundColor: '#515151'
-                    },
-                    headerTintColor: '#E7E7E7'
-                }}/>
+                        <Stack.Screen name='Cadastro' component={Cadastro} options={{
+                            title: 'Realizar Cadastro',
+                            headerStyle: {
+                                backgroundColor: '#515151'
+                            },
+                            headerTintColor: '#E7E7E7'
+                        }}/>
 
-                
-                <Stack.Screen name='Recuperar' component={RecuperarSenha} options={{
-                    title: 'Esqueci minha senha',
-                    headerStyle: {
-                        backgroundColor: '#515151'
-                    },
-                    headerTintColor: '#E7E7E7'
-                }}/> */}
-
-                <Stack.Screen name="Home" component={DrawerNavigation} options={{
+                        
+                        <Stack.Screen name='Recuperar' component={RecuperarSenha} options={{
+                            title: 'Esqueci minha senha',
+                            headerStyle: {
+                                backgroundColor: '#515151'
+                            },
+                            headerTintColor: '#E7E7E7'
+                        }}/>
+                    </>
+                : 
+                    <Stack.Screen name="Home" component={DrawerNavigation} options={{
                         headerShown: false
                     }} />
+            }
             </Stack.Navigator>
         </>
     )
