@@ -8,7 +8,7 @@ const INITIAL_STATE = {
     usuario: null,
     carteiraCorrente: [],
     movimentacaoCarteiraCorrente: [],
-    isAuthenticate: false
+    isAuthenticate: false, 
 }
 
 const stateReducer = (state = INITIAL_STATE, action) => {
@@ -44,7 +44,7 @@ const stateReducer = (state = INITIAL_STATE, action) => {
         case MOVIMENTACAO_CARTEIRA_CORRENTE: 
             return {
                 ...state,
-               movimentacaoCarteiraCorrente: action.movimentacaoCarteiraCorrente 
+               movimentacaoCarteiraCorrente: action.movimentacaoCarteiraCorrente, 
             }
 
         case LOADING: 

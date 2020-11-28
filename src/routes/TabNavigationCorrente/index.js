@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { setCarteiraCorrente, setMovimentacaoCarteiraCorrente } from '../../store/actions';
 import HomeCarteiraCorrente from '../../pages/HomeCarteiraCorrente';
 import MovimentacaoCarteiraCorrente from '../../pages/MovimentacaoCarteiraCorrente';
+import RelatorioCarteiraCorrente from '../../pages/RelatorioCarteiraCorrente';
 
 const Tab = createBottomTabNavigator();
 
@@ -54,7 +55,7 @@ function TabNavigationCorrente(props){
                 <Tab.Screen                     
                 initialParams={props}
                 name="Relatorio"
-                component={HomeCarteiraCorrente}
+                component={RelatorioCarteiraCorrente}
                 options={{ 
                     tabBarIcon: ({focused}) => {
                         if(focused){

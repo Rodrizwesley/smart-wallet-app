@@ -160,6 +160,7 @@ function Cadastro(props) {
                         value={senha1}
                         onChangeText={setSenha1} 
                         returnKeyType='next'
+                        secureTextEntry
                         onSubmitEditing={() => refSenha2.current.focus()}
                         />
 
@@ -172,6 +173,7 @@ function Cadastro(props) {
                         value={senha2}
                         onChangeText={setSenha2} 
                         returnKeyType='next'
+                        secureTextEntry
                         autoCapitalize='none'
                         />
                 </View>

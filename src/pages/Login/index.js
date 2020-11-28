@@ -34,6 +34,7 @@ function Login(props) {
             try {
                 let login = await UsuarioService.login(email, password);
                 if(login.isAuthenticate){
+                    console.log(login.Usuario)
                     setUsuario(login.Usuario);
                     doLogin(true);
                 }else{

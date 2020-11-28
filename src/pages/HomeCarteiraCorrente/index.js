@@ -1,5 +1,5 @@
 import React, { useEffect }  from 'react';
-import { Text, View, ScrollView, Alert, TouchableOpacity, Modal, Image, TextInput } from 'react-native';
+import { Text, View, ScrollView, Alert, TouchableOpacity, Modal, Image, TextInput, RefreshControl } from 'react-native';
 import { ProgressBar } from '@react-native-community/progress-bar-android';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -7,7 +7,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { RadioButton } from 'react-native-paper';
 import { setCarteiraCorrente, setMovimentacaoCarteiraCorrente, setLoading } from '../../store/actions';
 import { STYLE } from '../../configs';
-import { CarteiraCorrenteService } from '../../services';
+import { CarteiraCorrenteService, MovimentacaoCarteiraCorrenteService } from '../../services';
 import { CardResumo } from '../../components/CardResumoCarteira';
 import { CardCarteira } from '../../components/CardCarteira';
 import { CardMovimentacaoCarrocel } from '../../components/CardMovimentacaoCarrocel';
@@ -19,8 +19,7 @@ function HomeCarteiraCorrente(props) {
         setCarteiraCorrente,
         setMovimentacaoCarteiraCorrente,
         globalState,
-        setLoading,
-        navigation
+        setLoading
     } = props;
 
     const [modal, setModal] = React.useState(false);
@@ -31,6 +30,7 @@ function HomeCarteiraCorrente(props) {
     const [items, setItems] = React.useState([]);
     const [movimentacao, setMovimentacao] = React.useState([]);
     const [saldo, setSaldo] = React.useState(0);
+    const [refreshing, setRefreshing] = React.useState(false);
 
     let controller;
 
@@ -56,18 +56,26 @@ function HomeCarteiraCorrente(props) {
             }
         })
 
-        let _carteirasCorrente = await CarteiraCorrenteService.getAllCarteiraCorrenteByUsuario(7);
+        let _carteirasCorrente = await CarteiraCorrenteService.getAllCarteiraCorrenteByUsuario(globalState.usuario.id_usuario);
         let _temsCarteira = [];
         let _saldo = 0
         _carteirasCorrente.forEach(item => {
+            // console.log(item.saldo)
             _temsCarteira.push(item.saldo);
-            _saldo += item.saldo;
         })
         setCarteiraCorrente(_carteirasCorrente);
+
+        let _movimentacao = await MovimentacaoCarteiraCorrenteService.getAllMovimentacaoCarteiraCorrenteByUsuario(globalState.usuario.id_usuario);
+        _movimentacao.forEach(item => {
+             _temsCarteira.push(item.valor);
+            _saldo += item.valor;
+        })
+        setMovimentacaoCarteiraCorrente(_movimentacao);
 
         setItems(_tems);
         setMovimentacao(_temsCarteira);
         setSaldo(_saldo)
+        setRefreshing(false);
         setLoading(false);
     }
 
@@ -76,7 +84,7 @@ function HomeCarteiraCorrente(props) {
 
         let _saldo = Number.parseFloat(objCarteira.saldo)
         objCarteira.saldo = _saldo;
-        objCarteira.idUsuario = 7
+        objCarteira.idUsuario = globalState.usuario.id_usuario
         console.log(objCarteira);
         let persistCarteira = await CarteiraCorrenteService.createCarteiraCorrente(objCarteira);
 
@@ -86,8 +94,8 @@ function HomeCarteiraCorrente(props) {
         setEdicao(false);
         setObjCarteira({cartao: 0});
         setValue(null)
-        await syncPage();
         setLoading(false);
+        await syncPage();
     }
 
     const editaCarteira = async () => {
@@ -104,7 +112,6 @@ function HomeCarteiraCorrente(props) {
         setObjCarteira({cartao: 0});
         setValue(null);
         await syncPage();
-        setLoading(false);
     }
 
     const deleteCarteira = async () => {
@@ -117,7 +124,6 @@ function HomeCarteiraCorrente(props) {
         setObjCarteira({cartao: 0});
         setValue(null);
         await syncPage();
-        setLoading(false);
     }
 
     const buscaCarteira = (idCarteiraCorrente) => {
@@ -136,7 +142,10 @@ function HomeCarteiraCorrente(props) {
     return(
         <View style={STYLE.containerInternal}>
             <Background navigation={props.navigation}/>
-            <ScrollView style={{flex: 1, marginTop: 50}} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always'>
+            <ScrollView style={{flex: 1, marginTop: 50}} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always' refreshControl={<RefreshControl colors={['#7445FF']} refreshing={refreshing} onRefresh={async () => {
+                setRefreshing(true);
+                await syncPage();
+            }} />}>
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -320,9 +329,13 @@ function HomeCarteiraCorrente(props) {
                 </View>
 
                 <ScrollView horizontal={true} style={{paddingHorizontal: 30, marginVertical:10}} showsHorizontalScrollIndicator={false}>
-                    <CardMovimentacaoCarrocel descricao='Compra carrefour' valor='285,56' />
-                    <CardMovimentacaoCarrocel descricao='Compra extra' valor='358,25' />
-                    <CardMovimentacaoCarrocel descricao='Pagamento salário' valor='2.800,00' />
+                    {
+                        globalState.movimentacaoCarteiraCorrente.map((item, index) => {
+                            return(
+                                <CardMovimentacaoCarrocel  key={`movimentacao-carteira-corrente-${item.idMovimentacaoCarteiraCorrente}`}  descricao={item.descricaoMovimentacao} valor={item.valor.toFixed(2)} />
+                            )
+                        })
+                    }
                 </ScrollView>
 
                 {

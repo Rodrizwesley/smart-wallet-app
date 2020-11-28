@@ -14,9 +14,7 @@ import MenuContent from '../../components/MenuContent';
 const Drawer = createDrawerNavigator();
 
 function MenuLateral(props) {
-  useEffect(() => {
-    console.log(props)
-  }, [])
+
   return (
     <Drawer.Navigator 
       drawerPosition='right' 

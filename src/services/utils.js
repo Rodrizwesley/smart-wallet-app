@@ -46,8 +46,32 @@ function telMask(v){
     .replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
 }
 
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+function formataDinheiro(n) {
+    return "R$ " + n.toFixed(2)
+        .replace('.', ',')
+        .replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
+}
+
+function formataDinheroEmNumero(str){
+    return str
+    // .replace(/\./g, "")
+    .replace(/,/, ".")
+    .replace(/[^0-9.-]/g, "")
+    // .replace(/\D/g,"")             //Remove tudo o que não é dígito
+}
+
 export {
     cpfMask,
     validaCPF,
-    telMask
+    telMask,
+    addZero,
+    formataDinheiro,
+    formataDinheroEmNumero
 }

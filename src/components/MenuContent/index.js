@@ -13,10 +13,6 @@ function MenuContent(props){
         globalState
     } = props;
 
-    useEffect(() => {
-        console.log(props)
-    }, [])
-
     return (
         <View style={STYLE.drawerContainer}>
             <View>
